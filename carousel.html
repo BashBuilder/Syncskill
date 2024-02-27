@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      ul {
+        list-style: none;
+      }
+      .heading {
+        text-align: center;
+        padding-top: 2rem;
+        font-family: sans-serif;
+        color: #1a1b3f;
+      }
+      .carousel {
+        position: relative;
+        overflow: hidden;
+      }
+      .carousel__slider {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100vw;
+        height: 200px;
+      }
+      .carousel__list {
+        position: absolute;
+        width: 100%;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .carousel__item {
+        transition: transform 0.2s ease-in-out;
+        padding: 0 1rem;
+      }
+      img {
+        width: 150px;
+      }
+      .carousel__item:hover {
+        transform: scale(1.1);
+      }
+    </style>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div>
+      <h1 class="heading">Where Our Students work</h1>
+      <section class="carousel">
+        <div class="carousel__slider">
+          <ul class="carousel__list">
+            <li class="carousel__item">
+              <img
+                src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSqVv-rfIkQFmeC3BaYM4He_HTkPJCj2wGQ9c865zcwAcpkq6vQ"
+                alt=""
+              />
+            </li>
+            <li class="carousel__item">
+              <img
+                src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQH9z5aX1LgSctAZ3zI846LnJQTbm1_3VwLwNQRunnL9T-SxNTC"
+                alt=""
+              />
+            </li>
+            <li class="carousel__item">
+              <img
+                src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRls3Y5GnFBIbTJHQEIggU0BpFbFUqB90kwfaSU16XS414jdlpE"
+                alt=""
+              />
+            </li>
+            <li class="carousel__item">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaq7F1mvf13aVN9JD9QCV-t1xpQOdkzIjoVM2yWAloNLCDAU78"
+                alt=""
+              />
+            </li>
+            <li class="carousel__item">
+              <img
+                src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRYOUsKYj__NtxEoMRPb8g3kz085Y2yEJZ_Ww3v1n_eFZe6K_FO"
+                alt=""
+              />
+            </li>
+            <li class="carousel__item">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh8Y7du17KPV6xZQzmwW2g_GTm8wOUASv1nYiE6P_Z7Pit6ABo"
+                alt=""
+              />
+            </li>
+            <li class="carousel__item">
+              <img
+                src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRSS7hmMdA1c-J2sM3FCLOTac1AnlMMwbhXzMwjxI1iWIlm7Gm2"
+                alt=""
+              />
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      "use strict";
+
+      function carousel() {
+        let carouselSlider = document.querySelector(".carousel__slider");
+        let list = document.querySelector(".carousel__list");
+        let item = document.querySelectorAll(".carousel__item");
+        let list2;
+
+        const speed = 0.5;
+
+        const width = list.offsetWidth;
+        let x = 0;
+        let x2 = width;
+
+        function clone() {
+          list2 = list.cloneNode(true);
+          carouselSlider.appendChild(list2);
+          list2.style.left = `${width}px`;
+        }
+
+        function moveFirst() {
+          x -= speed;
+
+          if (width >= Math.abs(x)) {
+            list.style.left = `${x}px`;
+          } else {
+            x = width;
+          }
+        }
+
+        function moveSecond() {
+          x2 -= speed;
+
+          if (list2.offsetWidth >= Math.abs(x2)) {
+            list2.style.left = `${x2}px`;
+          } else {
+            x2 = width;
+          }
+        }
+
+        function hover() {
+          clearInterval(a);
+          clearInterval(b);
+        }
+
+        function unhover() {
+          a = setInterval(moveFirst, 10);
+          b = setInterval(moveSecond, 10);
+        }
+
+        clone();
+
+        let a = setInterval(moveFirst, 10);
+        let b = setInterval(moveSecond, 10);
+
+        carouselSlider.addEventListener("mouseenter", hover);
+        carouselSlider.addEventListener("mouseleave", unhover);
+      }
+
+      carousel();
+    </script>
+  </body>
+</html>
